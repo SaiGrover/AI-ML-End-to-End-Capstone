@@ -1,4 +1,4 @@
-# Life Expectancy EDA — README
+# Part 1 — README
 
 ## Dataset Choice
 
