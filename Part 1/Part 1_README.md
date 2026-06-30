@@ -189,21 +189,33 @@ All outliers are large countries such as China, India, and the United States. Th
 
 ### 7a – Line Plot: Global Average Life Expectancy by Year
 
+<img width="984" height="484" alt="image" src="https://github.com/user-attachments/assets/febedb40-6461-4af1-9771-892fa54c2a34" />
+
+
 The line plot shows global average life expectancy rising from approximately **66.8 years in 2000** to **71.6 years in 2015** — a steady upward trend of roughly 0.3 years per year. The improvement is broadly consistent, with no visible reversals, suggesting sustained global progress in healthcare, sanitation, and disease control over the period.
 
 ### 7b – Bar Chart: Mean Life Expectancy by Development Status
+
+<img width="683" height="484" alt="image" src="https://github.com/user-attachments/assets/c129864a-1cb3-454e-843f-30674f796c39" />
+
 
 Developed countries average approximately **79.2 years**, compared to **67.1 years** for developing countries — a gap of more than 12 years. The chart makes this disparity immediately visible and confirms that development status will be an important predictor in Part 2.
 
 ### 7c – Histogram: Population (Most Skewed Column)
 
+<img width="884" height="484" alt="image" src="https://github.com/user-attachments/assets/d19ee944-ebb6-442a-ab33-9ff9dba67573" />
+
 The distribution of `Population` is extremely right-skewed (skewness = 15.92). The histogram shows nearly all observations clustered in the lowest bin (small and medium-sized countries), with the bars dropping steeply and barely visible bars at higher values. The KDE curve has a sharp spike near zero with a very long, flat right tail extending into the billions. This shape confirms that the mean (12.75 million) is completely unrepresentative of the typical observation and that the median (1.39 million) must be used for imputation.
 
 ### 7d – Scatter Plot: GDP vs Life Expectancy
 
+<img width="884" height="584" alt="image" src="https://github.com/user-attachments/assets/5f2f4df4-3843-413d-aabb-55fb97a694cb" />
+
 The scatter plot shows a **positive, non-linear** relationship: countries with higher GDP per capita tend to have higher life expectancy. However, the relationship is steep at low GDP values (increasing GDP from near-zero to ~$5 000 yields large life-expectancy gains) and flattens at higher GDP levels (going from $30 000 to $100 000 produces only modest additional gains). Developing countries (orange) cluster in the lower-left, while developed countries (blue) cluster in the upper-right. This concave shape suggests a **logarithmic** transformation of GDP would linearise the relationship and improve Part 2 model fit.
 
 ### 7e – Box Plot: Life Expectancy by Development Status
+
+<img width="784" height="584" alt="image" src="https://github.com/user-attachments/assets/17dedc7d-d67f-4d9f-911c-8fbb5c4a172c" />
 
 The box plot reveals:  
 - **Developed** countries: median ≈ 81 years, narrow interquartile range (IQR ≈ 4 years), very few outliers.  
@@ -216,6 +228,8 @@ The large spread within the "Developing" group reflects the heterogeneity of tha
 ## Task 8 – Correlation Heat Map
 
 The Pearson correlation matrix was computed for all numeric columns and visualised as a heat map.
+
+<img width="1478" height="1283" alt="image" src="https://github.com/user-attachments/assets/7266c6ad-2254-4d5e-a34b-10fd349a97eb" />
 
 **Highest absolute correlation: `infant deaths` ↔ `under-five deaths` (r = 0.997)**
 
@@ -316,6 +330,6 @@ Final cleaned file: **`cleaned_data.csv`** (2 938 rows × 22 columns, 0 nulls ex
 | File | Description |
 |------|-------------|
 | `Life_Expectancy_Data.csv` | Original raw dataset (WHO) |
-| `life_expectancy_eda.ipynb` | Executed Jupyter notebook — all tasks, outputs, and plots |
+| `Part 1.ipynb` | Executed Jupyter notebook — all tasks, outputs, and plots |
 | `cleaned_data.csv` | Cleaned dataset for use in Parts 2 & 3 |
-| `README.md` | This file |
+| `Part 1_README.md` | This file |
