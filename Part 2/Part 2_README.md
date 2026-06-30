@@ -1,4 +1,4 @@
-# Part 2 — Supervised Machine Learning README
+# Part 2 —  README
 
 ## Dataset Choice
 
@@ -152,7 +152,9 @@ For a task framed around identifying at-risk or under-performing countries (i.e.
 
 **AUC = 0.957**
 
-Figure 1 shows the ROC curve.
+<img width="784" height="684" alt="image" src="https://github.com/user-attachments/assets/bcdc463f-b684-4e72-bfb4-fabdda7a840f" />
+
+Figure shows the ROC curve.
 
 An AUC of 0.957 means that if we randomly pick one country with above-median life expectancy and one with below-median life expectancy, the model assigns a higher predicted probability to the above-median country about **95.7%** of the time. This is a very strong separation between the two classes — the model's probability scores rank countries by their health outcome status with high reliability, well above the 0.5 AUC of a random classifier.
 
