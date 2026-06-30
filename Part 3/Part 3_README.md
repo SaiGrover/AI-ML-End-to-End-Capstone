@@ -1,4 +1,4 @@
-# Part 3 — Advanced Modeling README
+# Part 3 — README
 
 ## Dataset Choice
 
@@ -189,7 +189,7 @@ This grid contains **3 × 3 × 2 = 18** distinct hyperparameter configurations. 
 
 ### Grid Search vs Randomized Search Trade-off
 
-**Grid Search** exhaustively evaluates every combination in the specified parameter grid, guaranteeing that the best combination *within that grid* is found, but its computational cost grows multiplicatively with the number of parameters and values per parameter — adding one more hyperparameter with 3 values would triple the total fits required (here, 90 → 270). This becomes impractical for grids with many parameters or wide ranges. **Randomized Search**, by contrast, samples a fixed number of random combinations from the specified parameter distributions, allowing the search budget (number of fits) to be set independently of the grid's theoretical size — it can explore a much larger or more finely-grained search space for the same computational cost, at the cost of no longer guaranteeing the globally-best combination is tested. In practice, Randomized Search is often preferred for large search spaces or expensive models, while Grid Search remains a sound choice (as used here) for smaller, well-scoped grids like this 18-combination Random Forest grid, where exhaustiveness is computationally affordable.
+**Grid Search** exhaustively evaluates every combination in the specified parameter grid, guaranteeing that the best combination *within that grid* is found, but its computational cost grows multiplicatively with the number of parameters and values per parameter — adding one more hyperparameter with 3 values would triple the total fits required (here, 90 -> 270). This becomes impractical for grids with many parameters or wide ranges. **Randomized Search**, by contrast, samples a fixed number of random combinations from the specified parameter distributions, allowing the search budget (number of fits) to be set independently of the grid's theoretical size — it can explore a much larger or more finely-grained search space for the same computational cost, at the cost of no longer guaranteeing the globally-best combination is tested. In practice, Randomized Search is often preferred for large search spaces or expensive models, while Grid Search remains a sound choice (as used here) for smaller, well-scoped grids like this 18-combination Random Forest grid, where exhaustiveness is computationally affordable.
 
 ---
 
@@ -203,21 +203,23 @@ This grid contains **3 × 3 × 2 = 18** distinct hyperparameter configurations. 
 | 0.8 | 1.0000 | 0.9917 |
 | 1.0 | 1.0000 | 0.9923 |
 
+<img width="884" height="584" alt="image" src="https://github.com/user-attachments/assets/49a941dd-471d-45a4-9580-3672fe6c4874" />
+
 Since the best model is a pipeline, test AUC was computed on raw `X_test`, not `X_test_scaled`, because the pipeline applies imputation and scaling internally.
 
 ### Interpretation
 
 **(i) Does training AUC decrease as the training set grows?** No — training AUC stays pinned at a perfect 1.0000 across every fraction tested. This is expected behavior for the tuned Random Forest (`max_depth=None`, `min_samples_leaf=1`): with no depth limit and the ability to isolate single training samples in leaf nodes, the model can perfectly memorize the training set at any size, so training AUC never drops below 1.0, regardless of how much training data is provided.
 
-**(ii) Does test AUC increase with more training data?** Yes, clearly and monotonically — test AUC rises from 0.977 at 20% of the training data to 0.992 at 100%, a steady improvement of about 1.5 percentage points as more data is added. This rising trend has not yet fully flattened by 100% of the available training data (the increase from 80% → 100% is still a positive 0.0006, smaller than earlier increments but not zero).
+**(ii) Does test AUC increase with more training data?** Yes, clearly and monotonically — test AUC rises from 0.977 at 20% of the training data to 0.992 at 100%, a steady improvement of about 1.5 percentage points as more data is added. This rising trend has not yet fully flattened by 100% of the available training data (the increase from 80% -> 100% is still a positive 0.0006, smaller than earlier increments but not zero).
 
-**(iii) Conclusion — data-limited or capacity-limited?** The model is best described as **mildly data-limited, but the marginal returns are diminishing rapidly**. Test AUC is still inching upward at 100% of the training data, suggesting that collecting more labeled data would likely continue to improve generalization performance somewhat — but the size of each successive improvement (0.0085 → 0.0037 → 0.0025 → 0.0006 across the four increments) is shrinking quickly, indicating we are approaching the point of diminishing returns. The constant 1.0 training AUC across all fractions also signals that the model has more than enough *capacity* to fit any amount of training data thrown at it (it is not capacity-constrained) — the bottleneck for further test-AUC gains is genuinely the quantity (and possibly diversity) of training examples available, not the model's expressive power.
+**(iii) Conclusion — data-limited or capacity-limited?** The model is best described as **mildly data-limited, but the marginal returns are diminishing rapidly**. Test AUC is still inching upward at 100% of the training data, suggesting that collecting more labeled data would likely continue to improve generalization performance somewhat — but the size of each successive improvement (0.0085 -> 0.0037 -> 0.0025 -> 0.0006 across the four increments) is shrinking quickly, indicating we are approaching the point of diminishing returns. The constant 1.0 training AUC across all fractions also signals that the model has more than enough *capacity* to fit any amount of training data thrown at it (it is not capacity-constrained) — the bottleneck for further test-AUC gains is genuinely the quantity (and possibly diversity) of training examples available, not the model's expressive power.
 
 ---
 
 ## Task 8 — Serialized Model
 
-The best pipeline from `GridSearchCV` (`SimpleImputer(strategy='median')` → `StandardScaler()` → `RandomForestClassifier(max_depth=None, min_samples_leaf=1, n_estimators=200, random_state=42)`) was saved with:
+The best pipeline from `GridSearchCV` (`SimpleImputer(strategy='median')` -> `StandardScaler()` -> `RandomForestClassifier(max_depth=None, min_samples_leaf=1, n_estimators=200, random_state=42)`) was saved with:
 
 ```python
 joblib.dump(best_pipeline, 'best_model.pkl')
