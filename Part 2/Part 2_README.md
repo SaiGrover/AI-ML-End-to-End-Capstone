@@ -79,6 +79,8 @@ The model explains **82.4%** of the variance in life expectancy on the held-out 
 
 **Added graph:** A top-10 OLS coefficient bar chart was added after the coefficient table in the notebook. It visualizes the strongest positive and negative standardized coefficients and supports the written multicollinearity discussion.
 
+<img width="984" height="584" alt="image" src="https://github.com/user-attachments/assets/ee16313f-3129-4afc-884c-79dc2dc953f5" />
+
 **Plot interpretation:** This chart is documented here because it extends the linear-regression coefficient analysis. The largest bars belong to `under-five deaths`, `infant deaths`, and `Adult Mortality`, showing that mortality-related variables dominate the OLS model. The opposite signs for `infant deaths` and `under-five deaths` make the multicollinearity issue visible and justify the later Ridge comparison.
 
 ### Interpreting coefficients (scaled features)
@@ -185,6 +187,8 @@ Recall    = TP / (TP + FN)
 
 **Added graph:** A threshold-metric line chart was added in this section of the notebook. It plots precision, recall, and F1 from threshold 0.30 to 0.70, making the trade-off visible instead of only tabular.
 
+<img width="884" height="584" alt="image" src="https://github.com/user-attachments/assets/4809277f-d9ab-4975-8c5a-5ac2252b4de9" />
+
 **Plot interpretation:** The threshold chart belongs with the decision-threshold section because it shows how the model behaves when the classification cutoff changes. Recall is highest at lower thresholds, precision is highest at higher thresholds, and F1 peaks around the default 0.50 threshold. This visual confirms that the default threshold is a reasonable balanced choice for this dataset.
 
 **(c) Precision vs Recall — which matters more here:** As discussed above, if the downstream goal is to identify countries needing health-policy attention (i.e., correctly catching as many below-median, at-risk countries as possible), **recall is more important** than precision — a missed at-risk country (false negative) represents a continued lack of intervention, which is more costly than incorrectly flagging a country that turns out to be fine (false positive, which simply triggers extra (low-cost) review).
@@ -207,6 +211,8 @@ In scikit-learn's `LogisticRegression`, `C` is the **inverse** of the regulariza
 Reducing `C` from 1.0 to 0.01 **worsened** performance on this dataset across every metric reported: precision dropped from 0.856 to 0.835, recall dropped from 0.909 to 0.902, and AUC dropped from 0.957 to 0.948. This indicates that the baseline model (`C=1.0`) was not meaningfully overfitting — the moderate amount of regularization implicit in `C=1.0` was already appropriate for this feature set and sample size, and forcing much stronger regularization (`C=0.01`) caused the model to underfit slightly, shrinking useful coefficients (including the genuinely informative mortality-related features) more than necessary and degrading its ability to separate the two classes.
 
 **Added graph:** A grouped bar chart was added after the regularization comparison table in the notebook. It compares precision, recall, and AUC for `C=1.0` and `C=0.01`, showing the slight performance drop under stronger regularization.
+
+<img width="984" height="584" alt="image" src="https://github.com/user-attachments/assets/ad2c9643-c0b8-499a-956e-eb9ad772df60" />
 
 **Plot interpretation:** The regularization chart is placed directly with the `C=0.01` experiment because it visualizes the same metric comparison. The `C=1.0` bars are slightly higher for precision, recall, and AUC, which supports the conclusion that stronger regularization underfits this feature set rather than improving generalization.
 
