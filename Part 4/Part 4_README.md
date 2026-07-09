@@ -253,6 +253,8 @@ All three records produced valid, schema-conformant JSON and passed the PII guar
 
 **Added graphs:** Three graphs were added immediately after the hand-crafted prediction cell in the notebook: a predicted-probability bar chart with a 0.50 threshold line, a selected-feature comparison chart for Adult Mortality, Schooling, HIV/AIDS, and Income composition of resources, and a predicted-class count chart. Together, these charts summarize the three examples before the LLM explanation step.
 
+**Plot interpretation:** These graphs are documented in the three-row demonstration section because they explain the exact records passed into the LLM. The probability chart shows Record 1 safely above the 0.50 threshold, Record 2 far below it, and Record 3 close to the boundary. The feature-comparison chart explains why the model separates the examples: the high-resource record has stronger schooling and income composition values, while the struggling profile has much higher mortality and HIV/AIDS burden. The class-count chart confirms that the three examples intentionally include both above-median and below-median cases, giving the LLM pipeline a balanced explanation demonstration.
+
 **Note on Record 3:** this input was deliberately constructed with mixed signals (moderate Adult Mortality, moderate Schooling, moderate GDP) to land near the model's decision boundary — its predicted probability of 0.495 is essentially a coin flip, which the LLM correctly reflected with a `"low"` confidence level, demonstrating that the explanation step is sensitive to the model's actual certainty rather than just its binary class output.
 
 ---
