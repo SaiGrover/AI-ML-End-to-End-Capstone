@@ -98,6 +98,8 @@ The dataset was loaded with `pd.read_csv()`. Column names were stripped of leadi
 
 **Added graph:** A missing-value percentage bar chart was added directly after this task in the notebook. It shows every column's null percentage and marks the 20% threshold used to decide that `Population` should be handled separately.
 
+<img width="1184" height="584" alt="image" src="https://github.com/user-attachments/assets/93b579b0-eda7-4843-b933-9c65c98cc862" />
+
 **Plot interpretation:** This graph belongs with the null-value task because it turns the null table into a quick visual audit. `Population` is the only bar crossing the 20% reference line, while `Hepatitis B`, `GDP`, `Total expenditure`, `Alcohol`, `Income composition of resources`, and `Schooling` remain below the threshold. This supports the cleaning decision to handle `Population` separately and median-impute the lower-missingness numeric columns.
 
 
@@ -149,6 +151,8 @@ Converting repetitive string columns to `category` reduces memory proportional t
 **Most skewed column: `Population` (skewness = 15.92)**
 
 **Added graph:** A top-10 absolute-skewness bar chart was added after the skewness table. It makes the dominance of `Population`, `infant deaths`, `under-five deaths`, and `Measles` visually clear.
+
+<img width="984" height="584" alt="image" src="https://github.com/user-attachments/assets/2778654a-7523-4f4a-8b94-457c91933e1b" />
 
 **Plot interpretation:** The added skewness chart is placed with Task 5 because it directly supports the skewness analysis. It shows that the largest skewness values come from count or size variables, especially `Population`, child mortality counts, and `Measles`. This reinforces why median imputation is safer than mean imputation for these columns.
 
@@ -234,6 +238,8 @@ The box plot reveals:
 The large spread within the "Developing" group reflects the heterogeneity of that category — it includes both high-middle-income countries approaching developed-world outcomes and low-income countries still facing high child mortality.
 
 **Added graph:** A violin plot was added immediately after the box plot in the notebook. It shows the distribution shape and quartiles for each status group, making the wider spread among developing countries easier to see.
+
+<img width="784" height="584" alt="image" src="https://github.com/user-attachments/assets/215f0cff-8471-4b31-ac02-406661ed683c" />
 
 **Plot interpretation:** The violin plot complements the box plot by showing the density shape, not just the median and quartiles. Developed countries have a tighter, higher-life-expectancy distribution, while developing countries have a broader spread and a longer lower tail. This confirms that `Status` is predictive, but also that `Status` alone cannot explain all variation within developing countries.
 
