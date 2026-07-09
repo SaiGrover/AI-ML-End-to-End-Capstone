@@ -77,6 +77,8 @@ The model explains **82.4%** of the variance in life expectancy on the held-out 
 | infant deaths | +10.85 |
 | Adult Mortality | −2.60 |
 
+**Added graph:** A top-10 OLS coefficient bar chart was added after the coefficient table in the notebook. It visualizes the strongest positive and negative standardized coefficients and supports the written multicollinearity discussion.
+
 ### Interpreting coefficients (scaled features)
 
 **Because features were standardized, coefficients are measured per one standard deviation increase rather than one raw unit.** Each coefficient represents the change in predicted life expectancy (in years) associated with a **one standard-deviation increase** in that feature, holding all other features constant.
@@ -179,6 +181,8 @@ Recall    = TP / (TP + FN)
 
 **(b) F1-maximizing threshold:** **0.50**, with F1 = 0.8818. This is also the default scikit-learn threshold, so the model's default behavior happens to already be near-optimal for balanced F1 on this test set.
 
+**Added graph:** A threshold-metric line chart was added in this section of the notebook. It plots precision, recall, and F1 from threshold 0.30 to 0.70, making the trade-off visible instead of only tabular.
+
 **(c) Precision vs Recall — which matters more here:** As discussed above, if the downstream goal is to identify countries needing health-policy attention (i.e., correctly catching as many below-median, at-risk countries as possible), **recall is more important** than precision — a missed at-risk country (false negative) represents a continued lack of intervention, which is more costly than incorrectly flagging a country that turns out to be fine (false positive, which simply triggers extra (low-cost) review).
 
 **(d) Threshold direction and cost:** To prioritize recall for the positive ("above-median") class, we would **lower** the threshold below 0.50 — e.g., to 0.30, which raises recall from 0.909 to 0.967. The cost of doing so is a drop in precision from 0.856 to 0.756: more below-median countries get incorrectly classified as above-median (more false positives), meaning some genuinely at-risk countries would be missed under a "flag low scorers" framing, or — under the alternate framing of flagging the positive class for resource allocation — more resources would be allocated to countries that don't strictly need them. The threshold choice should ultimately be set based on the relative real-world cost of a missed at-risk country versus a wasted resource allocation, which is a policy decision outside the scope of the model itself.
@@ -197,6 +201,8 @@ Recall    = TP / (TP + FN)
 In scikit-learn's `LogisticRegression`, `C` is the **inverse** of the regularization strength: `C = 1 / lambda`, where `lambda` scales the L2 penalty on the coefficients. A **smaller `C`** means a **larger** penalty, forcing coefficients to shrink more aggressively toward zero (stronger regularization); a **larger `C`** means a weaker penalty, allowing the model to fit the training data more closely (approaching unregularized logistic regression as `C → ∞`).
 
 Reducing `C` from 1.0 to 0.01 **worsened** performance on this dataset across every metric reported: precision dropped from 0.856 to 0.835, recall dropped from 0.909 to 0.902, and AUC dropped from 0.957 to 0.948. This indicates that the baseline model (`C=1.0`) was not meaningfully overfitting — the moderate amount of regularization implicit in `C=1.0` was already appropriate for this feature set and sample size, and forcing much stronger regularization (`C=0.01`) caused the model to underfit slightly, shrinking useful coefficients (including the genuinely informative mortality-related features) more than necessary and degrading its ability to separate the two classes.
+
+**Added graph:** A grouped bar chart was added after the regularization comparison table in the notebook. It compares precision, recall, and AUC for `C=1.0` and `C=0.01`, showing the slight performance drop under stronger regularization.
 
 ---
 

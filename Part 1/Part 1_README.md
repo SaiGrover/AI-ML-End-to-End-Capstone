@@ -96,6 +96,9 @@ The dataset was loaded with `pd.read_csv()`. Column names were stripped of leadi
 **Column exceeding 20 % null rate:** `Population` (22.19 %).  
 `Population` was **not** imputed at this stage (handled separately in Task 9-a).
 
+**Added graph:** A missing-value percentage bar chart was added directly after this task in the notebook. It shows every column's null percentage and marks the 20% threshold used to decide that `Population` should be handled separately.
+
+
 ### Why the median rather than the mean for imputation
 
 The median is the value that splits a distribution in half and is unaffected by extreme values. The mean, by contrast, is pulled toward outliers. In this dataset many columns (GDP, Population, infant deaths, Measles) are highly right-skewed, meaning a small number of very large values inflate the mean far above the typical country's value. Replacing a missing value with the mean would inject an artificially high number, distorting downstream statistics and model inputs. The median represents the "typical" country and keeps the imputed value within the realistic range of observed data.
@@ -142,6 +145,9 @@ Converting repetitive string columns to `category` reduces memory proportional t
 | … | … |
 
 **Most skewed column: `Population` (skewness = 15.92)**
+
+**Added graph:** A top-10 absolute-skewness bar chart was added after the skewness table. It makes the dominance of `Population`, `infant deaths`, `under-five deaths`, and `Measles` visually clear.
+
 
 ### Interpretation of skewness for `Population`
 
@@ -222,6 +228,8 @@ The box plot reveals:
 - **Developing** countries: median ≈ 70 years, wide IQR (≈ 14 years), and many low outliers representing countries with severe disease burdens or conflict.
 
 The large spread within the "Developing" group reflects the heterogeneity of that category — it includes both high-middle-income countries approaching developed-world outcomes and low-income countries still facing high child mortality.
+
+**Added graph:** A violin plot was added immediately after the box plot in the notebook. It shows the distribution shape and quartiles for each status group, making the wider spread among developing countries easier to see.
 
 ---
 

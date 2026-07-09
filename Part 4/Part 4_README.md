@@ -251,6 +251,8 @@ The guardrail correctly distinguishes PII-containing input from clean input and 
 
 All three records produced valid, schema-conformant JSON and passed the PII guardrail (no PII was present in any of the constructed prompts, since they are built entirely from numeric feature values and fixed template text).
 
+**Added graphs:** Three graphs were added immediately after the hand-crafted prediction cell in the notebook: a predicted-probability bar chart with a 0.50 threshold line, a selected-feature comparison chart for Adult Mortality, Schooling, HIV/AIDS, and Income composition of resources, and a predicted-class count chart. Together, these charts summarize the three examples before the LLM explanation step.
+
 **Note on Record 3:** this input was deliberately constructed with mixed signals (moderate Adult Mortality, moderate Schooling, moderate GDP) to land near the model's decision boundary — its predicted probability of 0.495 is essentially a coin flip, which the LLM correctly reflected with a `"low"` confidence level, demonstrating that the explanation step is sensitive to the model's actual certainty rather than just its binary class output.
 
 ---

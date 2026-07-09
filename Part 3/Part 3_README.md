@@ -107,6 +107,8 @@ On this dataset, Gini slightly outperformed Entropy (92.2% vs 90.1% test accurac
 | HIV/AIDS | 0.0825 |
 | BMI | 0.0629 |
 
+**Added graph:** A top-10 Random Forest feature-importance bar chart was added directly after this feature-importance table in the notebook. It expands the view beyond the top five features and helps identify where importance begins to taper off.
+
 ### How Random Forest computes feature importance
 
 For each feature, the Random Forest tracks how much that feature's splits reduce Gini impurity, averaged across every split that uses that feature, across every tree in the forest, and weighted by the number of samples each split affects. A feature that is repeatedly chosen for splits that cleanly separate the two classes accumulates a high importance score; a feature rarely used, or used only for splits that barely reduce impurity, accumulates a low score. The scores are normalized to sum to 1 across all features.
@@ -142,6 +144,8 @@ A second Random Forest with identical hyperparameters (`n_estimators=100`, `max_
 | Full model | 20 | 0.9924 |
 | Reduced model | 15 | 0.9919 |
 | **Difference (full − reduced)** | | **0.0006** |
+
+**Added graph:** A full-vs-reduced Random Forest ablation bar chart was added in this task section. It labels both AUC and feature count, making the small performance cost of dropping five features easy to compare.
 
 ### Interpretation
 
@@ -252,6 +256,8 @@ This ran without errors and confirmed correct predictions on two hand-crafted te
 | Random Forest | 0.9891 | 0.0053 | 0.9924 |
 | Gradient Boosting | 0.9868 | 0.0052 | 0.9888 |
 | **Tuned RF Pipeline (GridSearchCV)** | **0.9898** | **0.0049** | **0.9923** |
+
+**Added graph:** A grouped bar chart was added after the final comparison table in the notebook. It compares CV mean AUC and test AUC for each model, showing that the tuned Random Forest pipeline has both the strongest validation performance and matching test performance.
 
 ### Recommendation
 
