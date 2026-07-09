@@ -109,6 +109,8 @@ On this dataset, Gini slightly outperformed Entropy (92.2% vs 90.1% test accurac
 
 **Added graph:** A top-10 Random Forest feature-importance bar chart was added directly after this feature-importance table in the notebook. It expands the view beyond the top five features and helps identify where importance begins to taper off.
 
+<img width="984" height="584" alt="image" src="https://github.com/user-attachments/assets/480082b9-faf0-471a-b76b-7d5f6097a0de" />
+
 **Plot interpretation:** This feature-importance chart is documented under the Random Forest task because it explains which variables the ensemble uses most often for strong splits. `Adult Mortality`, `Income composition of resources`, and `Schooling` remain the leading predictors, while the lower-ranked features contribute much less. The gradual drop-off supports using the importance scores for the later ablation study.
 
 ### How Random Forest computes feature importance
@@ -148,6 +150,8 @@ A second Random Forest with identical hyperparameters (`n_estimators=100`, `max_
 | **Difference (full − reduced)** | | **0.0006** |
 
 **Added graph:** A full-vs-reduced Random Forest ablation bar chart was added in this task section. It labels both AUC and feature count, making the small performance cost of dropping five features easy to compare.
+
+<img width="684" height="484" alt="image" src="https://github.com/user-attachments/assets/891795c6-cbd0-4973-b41e-6eedbf7eddf0" />
 
 **Plot interpretation:** The ablation chart belongs with Task 4b because it visually compares the operational trade-off. The reduced model uses five fewer features but keeps almost the same AUC as the full model, showing that the removed low-importance features add little predictive value. This supports the recommendation that a smaller feature set could be acceptable in production.
 
@@ -262,6 +266,8 @@ This ran without errors and confirmed correct predictions on two hand-crafted te
 | **Tuned RF Pipeline (GridSearchCV)** | **0.9898** | **0.0049** | **0.9923** |
 
 **Added graph:** A grouped bar chart was added after the final comparison table in the notebook. It compares CV mean AUC and test AUC for each model, showing that the tuned Random Forest pipeline has both the strongest validation performance and matching test performance.
+
+<img width="1168" height="584" alt="image" src="https://github.com/user-attachments/assets/ce5b05dc-f7a1-4019-90ec-b30a540d1939" />
 
 **Plot interpretation:** This final comparison chart is placed with the recommendation section because it summarizes model selection visually. Logistic Regression and Decision Tree perform clearly below the ensemble methods, while Random Forest, Gradient Boosting, and the tuned Random Forest pipeline cluster near the top. The tuned pipeline is preferred because it combines the best CV mean AUC with a strong held-out test AUC and includes preprocessing inside the saved pipeline.
 
